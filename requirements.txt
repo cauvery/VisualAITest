@@ -1,0 +1,19 @@
+requests
+pytest
+attrs
+py
+cffi
+pytest-ordering
+pytest-xdist
+beautifulsoup4
+pytest-rerunfailures
+pytz
+virtualenv
+pytest-progress
+pytest-html
+PyYAML
+selenium == 3.13.0
+pdbpp
+requests-toolbelt
+eyes-selenium 
+delayed_assert

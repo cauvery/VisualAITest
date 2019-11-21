@@ -153,8 +153,8 @@ def test_canvas_chart_test(setup):
 def test_dynamic_content_test(setup):
     driver = setup
     
-    #driver.get("https://demo.applitools.com/hackathon.html?showAd=true")
-    driver.get("https://demo.applitools.com/hackathonV2.html?showAd=true")
+    driver.get("https://demo.applitools.com/hackathon.html?showAd=true")
+    #driver.get("https://demo.applitools.com/hackathonV2.html?showAd=true")
     
     driver.find_element_by_id("username").send_keys("ss")
     

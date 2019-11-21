@@ -10,18 +10,18 @@ b = BatchInfo("VISUAL_AI_BATCH")
 b.id_ = "CGTEST_BATCH"
 
 
-DEMO_APP_URL_V1 = "https://demo.applitools.com/hackathon.html"
-DEMO_APP_URL_V2 = "https://demo.applitools.com/hackathonV2.html"
+DEMO_APP_URL = "https://demo.applitools.com/hackathon.html"
+#DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
 def test_AI_login_page_UI(setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b
-    eyes.open(driver, "Demo app", "loginUITest", {'width': 800, 'height': 600})
-     
-    # version of app
-    driver.get(DEMO_APP_URL_V2)
+    eyes.open(driver, "Hackathon Test", "loginUITest", {'width': 800, 'height': 600})
+    eyes.force_full_page_screenshot = True
+    
+    driver.get(DEMO_APP_URL)
 
     eyes.check("Login Window test", Target.window())
     
@@ -47,9 +47,9 @@ def test_data_driven_AI_test(setup, username, password, message, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
-    eyes.open(driver, "Demo app", "DataDrivenTest", {'width': 800, 'height': 600})
-    
-    driver.get(DEMO_APP_URL_V2)
+    eyes.open(driver, "Hackathon Test", "DataDrivenTest", {'width': 800, 'height': 600})
+    eyes.force_full_page_screenshot = True
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys(username)
     
@@ -68,9 +68,9 @@ def test_table_sort_test(setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
-    eyes.open(driver, "Demo app", "TableSortTest", {'width': 800, 'height': 600})
+    eyes.open(driver, "Hackathon Test", "TableSortTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
-    driver.get(DEMO_APP_URL_V2)
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys("aa")
     
@@ -88,10 +88,10 @@ def test_canvas_chart_test(setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
-    eyes.open(driver, "Demo app", "TableSortTest", {'width': 800, 'height': 600})
+    eyes.open(driver, "Hackathon Test", "CanvasChartTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
     
-    driver.get(DEMO_APP_URL_V1)
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys("ss")
     
@@ -112,11 +112,10 @@ def test_dynamic_content_test(setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
-    eyes.open(driver, "Demo app", "TableSortTest", {'width': 800, 'height': 600})
+    eyes.open(driver, "Hackathon Test", "DynamicContentTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
     
-    #driver.get("https://demo.applitools.com/hackathon.html?showAd=true")
-    driver.get("https://demo.applitools.com/hackathonV2.html?showAd=true")
+    driver.get(DEMO_APP_URL + "?showAd=true")
     
     driver.find_element_by_id("username").send_keys("ss")
     

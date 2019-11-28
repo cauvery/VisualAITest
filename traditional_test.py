@@ -50,7 +50,6 @@ def test_login_page_UI(setup):
     #Assert Social icon Linkedin exists
     expect( len(driver.find_elements_by_xpath("//img[@src='img/social-icons/linkedin.png']")) == 1 )
     
-    
     assert_expectations()
     
 #params for data driven test with marks

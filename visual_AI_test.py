@@ -10,8 +10,8 @@ b = BatchInfo("VISUAL_AI_BATCH")
 b.id_ = "CGTEST_BATCH"
 
 
-DEMO_APP_URL = "https://demo.applitools.com/hackathon.html"
-#DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
+#DEMO_APP_URL = "https://demo.applitools.com/hackathon.html"
+DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
 def test_AI_login_page_UI(setup, eyes_setup):

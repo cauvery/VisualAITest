@@ -11,15 +11,18 @@ b.id_ = "CGTEST_BATCH"
 
 
 #DEMO_APP_URL = "https://demo.applitools.com/hackathon.html"
-DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
+#DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
-def test_AI_login_page_UI(setup, eyes_setup):
+def test_AI_login_page_UI(Mgr, setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b
     eyes.open(driver, "Hackathon Test", "loginUITest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
     
     driver.get(DEMO_APP_URL)
 
@@ -43,12 +46,16 @@ id_names = [
 
 # Data-Driven Test
 @pytest.mark.parametrize("username, password, message", login_data, ids = id_names)
-def test_data_driven_AI_test(setup, username, password, message, eyes_setup):
+def test_data_driven_AI_test(Mgr, setup, username, password, message, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
     eyes.open(driver, "Hackathon Test", "DataDrivenTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys(username)
@@ -64,12 +71,16 @@ def test_data_driven_AI_test(setup, username, password, message, eyes_setup):
         
         
 #Table Sort Test
-def test_table_sort_test(setup, eyes_setup): 
+def test_table_sort_test(Mgr, setup, eyes_setup): 
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
     eyes.open(driver, "Hackathon Test", "TableSortTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys("aa")
@@ -84,12 +95,15 @@ def test_table_sort_test(setup, eyes_setup):
     
     
 # Canvas Chart Test
-def test_canvas_chart_test(setup, eyes_setup):
+def test_canvas_chart_test(Mgr, setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
     eyes.open(driver, "Hackathon Test", "CanvasChartTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
     
     driver.get(DEMO_APP_URL)
     
@@ -108,12 +122,15 @@ def test_canvas_chart_test(setup, eyes_setup):
     eyes.check("canvas chart data ", Target.window())
     
 # Dynamic Content Test
-def test_dynamic_content_test(setup, eyes_setup):
+def test_dynamic_content_test(Mgr, setup, eyes_setup):
     driver = setup
     eyes = eyes_setup
     eyes.batch = b 
     eyes.open(driver, "Hackathon Test", "DynamicContentTest", {'width': 800, 'height': 600})
     eyes.force_full_page_screenshot = True
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
     
     driver.get(DEMO_APP_URL + "?showAd=true")
     

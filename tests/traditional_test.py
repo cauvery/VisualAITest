@@ -5,16 +5,19 @@ from delayed_assert import expect, assert_expectations
 import os
 import pytest
 
-DEMO_APP_URL_V1 = "https://demo.applitools.com/hackathon.html"
-DEMO_APP_URL_V2 = "https://demo.applitools.com/hackathonV2.html"
+#DEMO_APP_URL_V1 = "https://demo.applitools.com/hackathon.html"
+#DEMO_APP_URL_V2 = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
-def test_login_page_UI(setup):
+def test_login_page_UI(Mgr, setup):
+    
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"] 
     
     driver = setup
     
     # version V1 of demo app
-    driver.get(DEMO_APP_URL_V2)
+    driver.get(DEMO_APP_URL)
     
     # check for logo is present
     expect( len(driver.find_elements_by_xpath("//img[@src='img/logo-big.png']")) == 1 )
@@ -70,10 +73,13 @@ id_names = [
 
 # Data-Driven Test
 @pytest.mark.parametrize("username, password, message", login_data, ids = id_names)
-def test_data_driven_test(setup, username, password, message):
+def test_data_driven_test(Mgr, setup, username, password, message):
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver = setup
     
-    driver.get(DEMO_APP_URL_V2)
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys(username)
     
@@ -87,10 +93,13 @@ def test_data_driven_test(setup, username, password, message):
         assert(message == driver.find_element_by_id("logged-user-name-new").text)  #changes the id to reflect in version2 
  
 #Table Sort Test
-def test_table_sort_test(setup):
+def test_table_sort_test(Mgr, setup):
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver = setup
     
-    driver.get(DEMO_APP_URL_V2)
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys("ss")
     
@@ -129,10 +138,13 @@ def test_table_sort_test(setup):
     assert amounts_sorted == sorted(amounts), "sorting is incorrect"
     
 # Canvas Chart Test
-def test_canvas_chart_test(setup):
+def test_canvas_chart_test(Mgr, setup):
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver = setup
     
-    driver.get(DEMO_APP_URL_V1)
+    driver.get(DEMO_APP_URL)
     
     driver.find_element_by_id("username").send_keys("ss")
     
@@ -149,10 +161,13 @@ def test_canvas_chart_test(setup):
     driver.find_element_by_id("addDataset")
 
 # Dynamic Content Test
-def test_dynamic_content_test(setup):
+def test_dynamic_content_test(Mgr, setup):
+    conf = Mgr["conf"]
+    DEMO_APP_URL = conf["system"]["DEMO_APP_URL"]
+    
     driver = setup
     
-    driver.get("https://demo.applitools.com/hackathon.html?showAd=true")
+    driver.get(DEMO_APP_URL +  "?showAd=true")
     #driver.get("https://demo.applitools.com/hackathonV2.html?showAd=true")
     
     driver.find_element_by_id("username").send_keys("ss")

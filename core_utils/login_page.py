@@ -12,7 +12,7 @@ class LoginPageLocators(object):
 class LoginPage(BasePage):
     def __init__(self,Mgr):
         self.driver=Mgr["driver"]
-        self.base_url=Mgr["conf"]["system"]["agency-web-url"]
+        self.base_url=Mgr["conf"]
 
     def goto(self):
         self.driver.get(self.base_url+LoginPageLocators.PATH) 

@@ -1,17 +1,16 @@
 from selenium import webdriver
-from applitools.selenium import Eyes, Target
 from delayed_assert import expect, assert_expectations
+
+from applitools.selenium import Eyes, Target
+from applitools.common.config import BatchInfo
+
 import os
 import pytest
-from applitools.common.config import BatchInfo
 
 ''' Create the batch object and set the ID '''
 b = BatchInfo("VISUAL_AI_BATCH")
 b.id_ = "CGTEST_BATCH"
 
-
-#DEMO_APP_URL = "https://demo.applitools.com/hackathon.html"
-#DEMO_APP_URL = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
 def test_AI_login_page_UI(Mgr, setup, eyes_setup):
@@ -30,10 +29,10 @@ def test_AI_login_page_UI(Mgr, setup, eyes_setup):
     
 #params for data driven test with marks
 login_data = [ 
-    pytest.param("some_user", "", "Password must be present"), 
-    pytest.param("", "some_pwd", "Username must be present"), 
-    pytest.param("", "", "Both Username and Password must be present"),
-    pytest.param("aa", "bb", "Jack Gomez")
+    pytest.param("some_user", "", "Password must be present", marks=[pytest.mark.no_pwd]), 
+    pytest.param("", "some_pwd", "Username must be present", marks=[pytest.mark.no_un]), 
+    pytest.param("", "", "Both Username and Password must be present", marks=[pytest.mark.no_un_pwd]),
+    pytest.param("aa", "bb", "Jack Gomez", marks=[pytest.mark.positive_test])
     ] 
 
 #ids for the test items

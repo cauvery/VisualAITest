@@ -7,8 +7,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from applitools.selenium import Eyes, Target
 
 def pytest_addoption(parser):
-    parser.addoption( "--env", action="store", default="qa",
-                      help="options: dev or qa or stage or prod" )
+    parser.addoption( "--env", action="store", default="v1",
+                      help="options: v1 or v2" )
     parser.addoption( "--config-file", action="store", default=None,
                       help="specify your config file" )
     
@@ -54,7 +54,7 @@ def eyes_setup(request):
     print(results) 
     eyes.abort()
     
-"""   
+  
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
 
@@ -81,4 +81,3 @@ def get_fullpage_screenshot(name):
         total_width = driver.execute_script( "return document.body.parentNode.scrollWidth" )
         driver.set_window_size( total_width, total_height )
         driver.save_screenshot( name )
-"""

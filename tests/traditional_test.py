@@ -1,12 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-#from applitools.selenium import Eyes, Target
 from delayed_assert import expect, assert_expectations
 import os
 import pytest
 
-#DEMO_APP_URL_V1 = "https://demo.applitools.com/hackathon.html"
-#DEMO_APP_URL_V2 = "https://demo.applitools.com/hackathonV2.html"
 
 # Login Page UI Elements Test
 def test_login_page_UI(Mgr, setup):
@@ -38,7 +35,7 @@ def test_login_page_UI(Mgr, setup):
     expect( driver.find_element_by_id("password").get_attribute("placeholder") == "Enter your password" )
 
     # Assert Sign in button exists
-    expect( driver.find_element_by_id("log-in").text == "Sign in" )
+    expect( driver.find_element_by_id("log-in").text == "Log In" )
     
     #Assert Remember Me checkbox/label exists
     expect( len(driver.find_elements_by_xpath("//input[@type='checkbox']")) == 1 )
@@ -57,11 +54,11 @@ def test_login_page_UI(Mgr, setup):
     
 #params for data driven test with marks
 login_data = [ 
-    pytest.param("some_user", "", "Password must be present"), 
-    pytest.param("", "some_pwd", "Username must be present"), 
-    pytest.param("", "", "Both Username and Password must be present"),   # update the error message to new in v2
-    pytest.param("aa", "bb", "Jack Gomez")
-    ] 
+    pytest.param("some_user", "", "Password must be present", marks=[pytest.mark.no_pwd]), 
+    pytest.param("", "some_pwd", "Username must be present", marks=[pytest.mark.no_un]), 
+    pytest.param("", "", "Both Username and Password must be present", marks=[pytest.mark.no_un_pwd]),
+    pytest.param("aa", "bb", "Jack Gomez", marks=[pytest.mark.positive_test])
+    ]
 
 #ids for the test items
 id_names = [
@@ -90,7 +87,9 @@ def test_data_driven_test(Mgr, setup, username, password, message):
     if message != "Jack Gomez":
         assert(message == driver.find_element_by_xpath('//*[contains(@id,"random_id")]').text)
     else:
-        assert(message == driver.find_element_by_id("logged-user-name-new").text)  #changes the id to reflect in version2 
+        assert(message == driver.find_element_by_id("logged-user-name").text)
+        # id changed in v2
+        # assert(message == driver.find_element_by_id("logged-user-name-new").text)  #changes the id to reflect in version2 
  
 #Table Sort Test
 def test_table_sort_test(Mgr, setup):
@@ -107,7 +106,11 @@ def test_table_sort_test(Mgr, setup):
     
     driver.find_element_by_id("log-in").click()
     
-    assert("Jack Gomez" == driver.find_element_by_id("logged-user-name-new").text)
+    # V1 id is old (use this in v1)
+    assert("Jack Gomez" == driver.find_element_by_id("logged-user-name").text)
+    
+    # v2 id is changed (use this in v2)
+    #assert("Jack Gomez" == driver.find_element_by_id("logged-user-name-new").text)
     
     rows = driver.find_elements(By.XPATH,"//table[@id='transactionsTable']/tbody/tr")
     

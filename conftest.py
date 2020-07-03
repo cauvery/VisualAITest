@@ -46,7 +46,7 @@ def setup(request):
 @pytest.fixture(scope="function", autouse=False)
 def eyes_setup(request):
     eyes = Eyes()
-    eyes.api_key = os.environ['APPLITOOLS_API_KEY']  #"qnEyEOnPIYLpklckwTOnqynvZCJPePQgmIyX3buk2us110"   #os.environ['APPLITOOLS_API_KEY']
+    eyes.api_key = os.environ['APPLITOOLS_API_KEY']  
     
     yield eyes
     

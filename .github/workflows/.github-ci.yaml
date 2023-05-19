@@ -1,0 +1,26 @@
+stages:
+  - stage1
+  - stage2
+
+stage1_job:
+  stage: stage1
+  script:
+    - echo "Stage 1 job"
+
+stage2_success_job:
+  stage: stage2
+  script:
+    - echo "Stage 2 success job"
+  rules:
+    - exists:
+        - stage1_job
+    - when: on_success
+
+stage2_failure_job:
+  stage: stage2
+  script:
+    - echo "Stage 2 failure job"
+  rules:
+    - exists:
+        - stage1_job
+    - when: on_failure
